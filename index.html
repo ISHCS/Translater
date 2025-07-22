@@ -578,6 +578,8 @@
                 const apiKey = "AIzaSyAp4UwDbRMRagOMp4EUAz8YdVpXATm0rWg";
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
+                console.log('API URL being used:', apiUrl); // Log the URL for debugging
+
                 const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
