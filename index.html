@@ -3,796 +3,1570 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Innovated By Amer Founder Of Raji Technology Amharic/Oromoo Voice Translator</title>
-    <!-- Tailwind CSS CDN - Note: For production, consider installing Tailwind CSS as a PostCSS plugin or using the Tailwind CLI for better performance. -->
+    <title>Innovator Amer Abdullah - Raji Technology</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        /* Set default font to Inter */
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: #334155;
+            scroll-behavior: smooth;
         }
-
-        /* Loading spinner styles */
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: #6366F1; /* Indigo-500 */
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .section-heading {
+            color: var(--dark);
+            font-weight: 800;
+            position: relative;
             display: inline-block;
-            vertical-align: middle;
-            margin-left: 8px;
+            padding-bottom: 0.75rem;
+            margin-bottom: 2rem;
         }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2.5px;
         }
-
-        /* Custom button styles for better aesthetics */
+        
         .btn-primary {
-            background-image: linear-gradient(to right, #4CAF50 0%, #388E3C 100%); /* Deeper Green gradient */
-            box-shadow: 0 6px 20px 0 rgba(76, 175, 80, 0.6);
-            transition: all 0.3s ease;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 0.75rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
+        
         .btn-primary:hover {
-            background-image: linear-gradient(to right, #388E3C 0%, #4CAF50 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px 0 rgba(76, 175, 80, 0.8);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(37, 99, 235, 0.6);
         }
-        .btn-primary:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 10px 0 rgba(76, 175, 80, 0.4);
+        
+        .card {
+            background-color: white;
+            border-radius: 1.25rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            position: relative;
         }
-
-        .btn-danger {
-            background-image: linear-gradient(to right, #EF4444 0%, #B91C1C 100%); /* Deeper Red gradient */
-            box-shadow: 0 6px 20px 0 rgba(239, 68, 68, 0.6);
-            transition: all 0.3s ease;
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
-        .btn-danger:hover {
-            background-image: linear-gradient(to right, #B91C1C 0%, #EF4444 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px 0 rgba(239, 68, 68, 0.8);
-        }
-        .btn-danger:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 10px 0 rgba(239, 68, 68, 0.4);
-        }
-
-        .btn-secondary {
-            background-image: linear-gradient(to right, #6366F1 0%, #4F46E5 100%); /* Indigo gradient */
-            box-shadow: 0 6px 20px 0 rgba(99, 102, 241, 0.6);
-            transition: all 0.3s ease;
-        }
-        .btn-secondary:hover {
-            background-image: linear-gradient(to right, #4F46E5 0%, #6366F1 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px 0 rgba(99, 102, 241, 0.8);
-        }
-        .btn-secondary:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 10px 0 rgba(99, 102, 241, 0.4);
-        }
-
-        /* Disabled button styling */
-        button:disabled {
-            background-image: none !important;
-            background-color: #D1D5DB !important; /* Gray-300 */
-            color: #6B7280 !important; /* Gray-500 */
-            box-shadow: none !important;
-            cursor: not-allowed !important;
-            transform: none !important;
-        }
-
-        /* Enhanced input/display areas */
-        .display-box {
-            background-color: #FFFFFF; /* Pure white */
-            border: 1px solid #E5E7EB; /* Light gray border */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Softer shadow */
-            transition: all 0.3s ease-in-out;
-            font-size: 1.25rem; /* text-xl */
-            line-height: 1.75rem; /* leading-7 */
-            color: #374151; /* Gray-700 */
-        }
-        .display-box.translated {
-            background-color: #EEF2FF; /* Lighter blue for translated box */
-            border-color: #A5B4FC; /* Light indigo border */
-            color: #4338CA; /* Indigo-700 */
-            font-size: 1.5rem; /* text-2xl */
-            line-height: 2rem; /* leading-8 */
-            font-weight: 700; /* font-bold */
-        }
-        .display-box:hover {
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
-        }
-        .display-box:focus-within {
-            border-color: #6366F1; /* Indigo-500 */
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25);
-        }
-
-        /* Main container styling */
-        .main-container {
-            background-color: #FFFFFF;
-            border-radius: 1.5rem; /* rounded-3xl */
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25); /* Stronger, more attractive shadow */
-            padding: 2.5rem; /* p-10 */
-            max-width: 40rem; /* Increased max-width for better content display */
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .skill-bar-container {
+            background-color: #e2e8f0;
+            border-radius: 0.5rem;
+            height: 12px;
+            overflow: hidden;
+        }
+        
+        .skill-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 0.5rem;
+            transition: width 1.5s ease-in-out;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 1.25rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
             text-align: center;
-            transform: scale(1);
-            transition: all 0.4s ease-in-out;
+            border: 1px solid #e2e8f0;
+            position: relative;
         }
-        .main-container:hover {
-            transform: scale(1.02);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 5rem;
+            color: rgba(59, 130, 246, 0.1);
+            font-family: serif;
+            line-height: 1;
         }
-
-        /* Typography enhancements */
-        h1 {
-            font-size: 2.5rem; /* text-5xl */
-            font-weight: 900; /* font-extrabold */
-            color: #1F2937; /* Gray-900 */
-            letter-spacing: -0.05em; /* tracking-tight */
-            line-height: 1.2;
+        
+        .testimonial-card p {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 1.5rem;
+            line-height: 1.75;
+            position: relative;
+            z-index: 1;
         }
-        p {
-            color: #4B5563; /* Gray-600 */
-            font-size: 1.125rem; /* text-lg */
-            line-height: 1.75rem; /* leading-7 */
+        
+        .testimonial-card .author {
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-size: 1.125rem;
         }
-        label {
-            color: #374151; /* Gray-700 */
-            font-weight: 600; /* font-semibold */
+        
+        .testimonial-card .title {
+            font-size: 0.95rem;
+            color: #64748b;
         }
-        .message-display {
-            background-color: #F3F4F6; /* Gray-100 */
-            border-radius: 0.75rem; /* rounded-xl */
-            padding: 0.75rem 1rem; /* px-4 py-3 */
-            color: #6B7280; /* Gray-500 */
-            font-size: 0.875rem; /* text-sm */
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.06);
+        
+        /* Background pattern - more subtle */
+        .pattern-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2394a3b8' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zm0 36v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 36v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM24 22v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 36v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM24 10v-4h-2v4h-4v2h4v4h2V12h4V10h-4zM12 34v-4h-2v4H6v2h4v4h2v-4h4v-2h-4zm0 36v-4h-2v4H6v2h4v4h2v-4h4v-2h-4zM12 10v-4h-2v4H6v2h4v4h2V12h4V10h-4zM0 22v-4H-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 36v-4H-2v4h-4v2h4v4h2v-4h4v-2h-4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-size: 60px 60px;
         }
-        .try-saying-section h3 {
-            font-weight: 700; /* font-bold */
-            color: #374151; /* Gray-700 */
-        }
-        .try-saying-section ul {
-            color: #4B5563; /* Gray-600 */
-        }
-        .security-warning {
-            background-color: #FFFBEB; /* Yellow-50 */
-            border-color: #F59E0B; /* Yellow-500 */
-            color: #B45309; /* Yellow-700 */
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-        }
-
-        /* Flex container for select and flag */
-        .select-with-flag {
+        
+        /* Back to top button */
+        #back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
-            gap: 8px; /* Space between select and flag */
+            justify-content: center;
+            display: none;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: none;
+            cursor: pointer;
         }
-
-        .flag-display-img {
-            width: 40px; /* Adjust size as needed */
-            height: 25px; /* Adjust size as needed */
-            border: 1px solid #E5E7EB; /* Subtle border for flags */
-            border-radius: 4px; /* Slightly rounded corners */
-            object-fit: cover; /* Ensure image covers the area */
+        
+        #back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Navigation */
+        nav {
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+        
+        .timeline-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: white;
+            border: 4px solid var(--primary);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid white;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent white;
+        }
+        
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid white;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent white transparent transparent;
+        }
+        
+        .right::after {
+            left: -16px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Responsive timeline */
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-container::before {
+                left: 60px;
+                border: medium solid white;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent white transparent transparent;
+            }
+            
+            .left::after, .right::after {
+                left: 15px;
+            }
+            
+            .right {
+                left: 0%;
+            }
+        }
+        
+        /* Stats counter */
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Project showcase */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card img {
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 2rem 1.5rem 1.5rem;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover .project-overlay {
+            transform: translateY(0);
+        }
+        
+        /* Contact form */
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        
+        /* Dark mode toggle */
+        .dark-mode-toggle {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .dark-mode-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        /* Dark mode styles */
+        body.dark {
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        body.dark .card,
+        body.dark .testimonial-card {
+            background-color: #1e293b;
+            border-color: #334155;
+            color: #e2e8f0;
+        }
+        
+        body.dark .form-input {
+            background-color: #1e293b;
+            border-color: #334155;
+            color: #e2e8f0;
+        }
+        
+        body.dark .section-heading {
+            color: #f8fafc;
+        }
+        
+        body.dark .timeline-content {
+            background-color: #1e293b;
+            color: #e2e8f0;
+        }
+        
+        body.dark .left::before {
+            border-color: transparent transparent transparent #1e293b;
+        }
+        
+        body.dark .right::before {
+            border-color: transparent #1e293b transparent transparent;
+        }
+        
+        /* Floating animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Pulse animation */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Typewriter effect */
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid var(--primary);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: 
+                typing 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary) }
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-400 via-green-500 to-teal-500 p-4 antialiased">
+<body class="antialiased">
 
-    <div class="main-container">
-        <h1 class="mb-6">
-            Innovated By Amer Founder Of Raji Technology +251913395143
-        </h1>
-
-        <p class="mb-6">
-            Speak and translate between various Ethiopian, Indian, French, and other languages!
-        </p>
-
-        <div class="mb-4">
-            <label for="speakLanguageSelect" class="block mb-2">
-                Speak Language:
-            </label>
-            <div class="select-with-flag">
-                <select id="speakLanguageSelect" class="block w-full px-4 py-2 rounded-lg border focus:ring-indigo-500 focus:border-indigo-500 sm:text-base display-box">
-                    <!-- Options will be dynamically populated by JavaScript -->
-                </select>
-                <img id="speakFlagDisplay" class="flag-display-img" alt="Selected Language Flag">
+    <!-- Navigation Bar -->
+    <nav id="navbar" class="bg-white shadow-lg fixed w-full z-50 top-0 transition-all duration-300">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-800 hover:text-blue-600 transition-colors flex items-center">
+                <img src="https://placehold.co/40x40/3b82f6/ffffff?text=AA" alt="Logo" class="rounded-full mr-2">
+                <span>Amer Abdullah</span>
+            </a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#about" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">About</a>
+                <a href="#innovations" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Innovations</a>
+                <a href="#skills" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Skills</a>
+                <a href="#achievements" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Achievements</a>
+                <a href="#documents" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Documents</a>
+                <a href="#testimonials" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Testimonials</a>
+                <a href="#contact" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Contact</a>
+                
+                <!-- Dark mode toggle -->
+                <label class="dark-mode-toggle ml-4">
+                    <input type="checkbox" id="dark-mode-toggle">
+                    <span class="slider"></span>
+                </label>
             </div>
-        </div>
-
-        <div class="mb-6">
-            <label for="translateLanguageSelect" class="block mb-2">
-                Translate To Language:
-            </label>
-            <div class="select-with-flag">
-                <select id="translateLanguageSelect" class="block w-full px-4 py-2 rounded-lg border focus:ring-indigo-500 focus:border-indigo-500 sm:text-base display-box">
-                    <!-- Options will be dynamically populated by JavaScript -->
-                </select>
-                <img id="translateFlagDisplay" class="flag-display-img" alt="Selected Language Flag">
-            </div>
-        </div>
-
-        <div class="mb-8">
-            <p id="recognizedTextDisplay" class="mb-4 h-20 overflow-y-auto rounded-xl p-3 flex items-center justify-center display-box">
-                Speak here...
-            </p>
-            <p id="translatedTextDisplay" class="h-24 overflow-y-auto rounded-xl p-3 flex items-center justify-center display-box translated">
-                Translation will appear here.
-            </p>
-        </div>
-
-        <div class="flex flex-col gap-4 mb-6">
-            <div class="flex justify-center gap-4">
-                <button id="startButton" class="px-8 py-3 rounded-full text-white font-bold btn-primary">
-                    Start Listening
-                </button>
-                <button id="stopButton" class="px-8 py-3 rounded-full text-white font-bold btn-danger" disabled>
-                    Stop Listening
-                </button>
-            </div>
-            <button id="swapLanguagesButton" class="px-8 py-3 rounded-full text-white font-bold btn-secondary">
-                Swap Languages
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 hover:text-blue-600 focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
             </button>
         </div>
-
-        <p id="messageDisplay" class="message-display mt-4"></p>
-
-        <div class="mt-8 text-left try-saying-section">
-            <h3 class="font-bold mb-2" id="trySayingTitle">lets change the world with Innovaitons :</h3>
-            <ul class="list-disc list-inside space-y-1" id="trySayingExamples">
-                <li>"Email amerabdulah634@gmail.com</li>
-                <li>"Contact +251913395143</li>
-                <li>"Rajit Technology</li>
-            </ul>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 shadow-md">
+            <a href="#about" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">About</a>
+            <a href="#innovations" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Innovations</a>
+            <a href="#skills" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Skills</a>
+            <a href="#achievements" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Achievements</a>
+            <a href="#documents" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Documents</a>
+            <a href="#testimonials" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Testimonials</a>
+            <a href="#contact" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contact</a>
+            <div class="px-4 py-2 flex items-center justify-between">
+                <span>Dark Mode</span>
+                <label class="dark-mode-toggle">
+                    <input type="checkbox" id="mobile-dark-mode-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
         </div>
+    </nav>
 
-        <p id="securityWarning" class="text-xs mt-4 p-2 rounded-lg border security-warning hidden">
-            <strong>Innovated By:</strong> Raji Technolgy
-        </p>
-    </div>
+    <!-- Header/Hero Section -->
+    <header class="relative overflow-hidden bg-gradient-to-r from-blue-600 to-blue-800 text-white pt-32 pb-20 md:pt-40 md:pb-32">
+        <!-- Floating particles background -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-20 left-1/4 w-4 h-4 bg-white rounded-full opacity-20 floating" style="animation-delay: 0s;"></div>
+            <div class="absolute top-1/3 left-3/4 w-6 h-6 bg-white rounded-full opacity-15 floating" style="animation-delay: 1s;"></div>
+            <div class="absolute top-2/3 left-1/5 w-8 h-8 bg-white rounded-full opacity-10 floating" style="animation-delay: 2s;"></div>
+            <div class="absolute bottom-20 right-1/4 w-5 h-5 bg-white rounded-full opacity-15 floating" style="animation-delay: 3s;"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="mb-8">
+                <!-- Professional profile image with floating animation -->
+                <img src="https://placehold.co/180x180/ADD8E6/000000?text=Amer+Abdullah" alt="Amer Abdullah Profile" 
+                     class="rounded-full mx-auto border-4 border-white shadow-lg transform hover:scale-105 transition-transform duration-300 floating">
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4" data-aos="fade-up">
+                Innovator <span class="gradient-text">Amer Abdullah</span>
+            </h1>
+            <p class="text-xl md:text-2xl font-light mb-8" data-aos="fade-up" data-aos-delay="100">
+                Founder of <span class="font-semibold text-blue-100">Raji Technology</span> | Revolutionizing Healthcare through Innovation
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
+                <a href="#contact" class="btn-primary inline-block text-lg md:text-xl font-medium">
+                    Get in Touch <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <a href="#innovations" class="inline-block text-lg md:text-xl font-medium bg-white text-blue-600 hover:bg-gray-100 hover:text-blue-700 px-8 py-4 rounded-xl transition-all">
+                    View Innovations <i class="fas fa-lightbulb ml-2"></i>
+                </a>
+            </div>
+            
+            <!-- Stats counter -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="10">0</div>
+                    <div class="text-sm uppercase tracking-wider">Innovations</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="5">0</div>
+                    <div class="text-sm uppercase tracking-wider">Awards</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="15">0</div>
+                    <div class="text-sm uppercase tracking-wider">Projects</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="3">0</div>
+                    <div class="text-sm uppercase tracking-wider">Patents</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll down indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce" data-aos="fade-up" data-aos-delay="400">
+            <a href="#about" class="text-white text-2xl">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </header>
 
+    <!-- About Me Section -->
+    <section id="about" class="py-16 md:py-24 bg-gray-50 pattern-bg dark:bg-dark">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl section-heading text-center mb-12" data-aos="fade-up">About Me</h2>
+            <div class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-lg flex flex-col md:flex-row items-center" data-aos="fade-up" data-aos-delay="100">
+                <div class="md:w-1/3 mb-6 md:mb-0 md:mr-8 flex-shrink-0">
+                    <img src="https://placehold.co/300x400/ADD8E6/000000?text=Innovation" alt="Innovation" class="rounded-lg shadow-md w-full h-auto object-cover">
+                </div>
+                <div class="md:w-2/3">
+                    <p class="text-lg leading-relaxed mb-6 dark:text-gray-300">
+                        As the founder of <strong class="text-blue-600 dark:text-blue-400">Raji Technology</strong>, I am dedicated to pioneering innovative solutions that address critical challenges in healthcare and beyond. My journey is driven by a passion for leveraging technology to create tangible, positive impacts on society.
+                    </p>
+                    <p class="text-lg leading-relaxed mb-6 dark:text-gray-300">
+                        My work primarily focuses on integrating advanced systems and AI-powered solutions to enhance patient care, safety, and operational efficiency within health facilities. I believe in a future where technology makes healthcare more accessible, efficient, and patient-centric for everyone.
+                    </p>
+                    <p class="text-lg leading-relaxed dark:text-gray-300">
+                        I have had the distinct honor of presenting my innovations to esteemed government figures, including <strong class="text-blue-600 dark:text-blue-400">His Excellency Prime Minister Dr. Abiy Ahmed Ali</strong>, and key ministers, underscoring the national importance and recognition of my contributions.
+                    </p>
+                    
+                    <!-- Experience timeline -->
+                    <div class="mt-8">
+                        <h3 class="text-xl font-semibold mb-4 dark:text-white">My Journey</h3>
+                        <div class="timeline">
+                            <div class="timeline-container left" data-aos="fade-right">
+                                <div class="timeline-content">
+                                    <h4 class="font-bold dark:text-white">Founded Raji Technology</h4>
+                                    <small class="text-blue-600 dark:text-blue-400">2023 - Present</small>
+                                    <p class="mt-2 dark:text-gray-300">Established my own technology company focused on healthcare innovations.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-container right" data-aos="fade-left" data-aos-delay="100">
+                                <div class="timeline-content">
+                                    <h4 class="font-bold dark:text-white">Presented to Prime Minister</h4>
+                                    <small class="text-blue-600 dark:text-blue-400">2025</small>
+                                    <p class="mt-2 dark:text-gray-300">Honored to present at Sensa Museum inaugural exhibition.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-container left" data-aos="fade-right" data-aos-delay="200">
+                                <div class="timeline-content">
+                                    <h4 class="font-bold dark:text-white">First Patent Registered</h4>
+                                    <small class="text-blue-600 dark:text-blue-400">2023</small>
+                                    <p class="mt-2 dark:text-gray-300">Nurse Calling System copyright registered with Ethiopian IP Office.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Innovations Section -->
+    <section id="innovations" class="py-16 md:py-24 bg-white dark:bg-slate-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl section-heading text-center mb-12" data-aos="fade-up">My Innovations</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Integrated Smart Healthcare Solutions (ISHCS) Card -->
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 dark:bg-blue-900 rounded-full p-3 mr-4">
+                            <i class="fas fa-hospital text-blue-600 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-blue-700 dark:text-blue-400">Integrated Smart Healthcare Solutions (ISHCS)</h3>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">
+                        The ISHCS project is a comprehensive system designed to revolutionize healthcare delivery. It integrates multiple advanced technologies to improve patient outcomes and operational efficiency.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-hospital-user text-blue-500 dark:text-blue-400 mt-1 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Enhanced Patient-Provider Communication</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-file-medical text-blue-500 dark:text-blue-400 mt-1 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Electronic Health Records (EHR)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-blue-500 dark:text-blue-400 mt-1 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Real-Time Location Systems (RTLS)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-robot text-blue-500 dark:text-blue-400 mt-1 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">AI-Powered Solutions for data-driven decision-making</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-pills text-blue-500 dark:text-blue-400 mt-1 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Reduced Medication Errors through CPOE</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-chart-line text-blue-500 dark:text-blue-400 mt-1 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Potential Reduction in Hospital Mortality Rates</span>
+                        </li>
+                    </ul>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        Endorsed by the Ministry of Innovation and Technology, aligning with national priorities.
+                    </p>
+                    
+                    <!-- Project gallery -->
+                    <div class="mt-6 grid grid-cols-3 gap-2">
+                        <div class="project-card rounded-lg overflow-hidden">
+                            <img src="https://placehold.co/200x150/ADD8E6/000000?text=ISHCS+1" alt="ISHCS Project" class="w-full h-full object-cover">
+                            <div class="project-overlay">
+                                <h4 class="font-bold">ISHCS Interface</h4>
+                            </div>
+                        </div>
+                        <div class="project-card rounded-lg overflow-hidden">
+                            <img src="https://placehold.co/200x150/ADD8E6/000000?text=ISHCS+2" alt="ISHCS Project" class="w-full h-full object-cover">
+                            <div class="project-overlay">
+                                <h4 class="font-bold">System Architecture</h4>
+                            </div>
+                        </div>
+                        <div class="project-card rounded-lg overflow-hidden">
+                            <img src="https://placehold.co/200x150/ADD8E6/000000?text=ISHCS+3" alt="ISHCS Project" class="w-full h-full object-cover">
+                            <div class="project-overlay">
+                                <h4 class="font-bold">Deployment</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nurse Calling System Card -->
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 dark:bg-blue-900 rounded-full p-3 mr-4">
+                            <i class="fas fa-bell text-blue-600 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-blue-700 dark:text-blue-400">Nurse Calling System</h3>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">
+                        A core component of ISHCS, this innovative Nurse Calling System improves patient safety and staff responsiveness. It's designed to streamline communication between patients and healthcare providers.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-bell text-blue-500 dark:text-blue-400 mt-1 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Instant Patient-to-Nurse Communication</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-blue-500 dark:text-blue-400 mt-1 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Improved Response Times</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-hand-holding-medical text-blue-500 dark:text-blue-400 mt-1 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Enhanced Patient Care and Comfort</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clipboard-list text-blue-500 dark:text-blue-400 mt-1 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Streamlined Workflow for Nurses</span>
+                        </li>
+                    </ul>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        Acknowledged and supported by the Ministry of Health. Copyright registered with the Ethiopian Intellectual Property Authority.
+                    </p>
+                    
+                    <!-- Demo video -->
+                    <div class="mt-6 relative rounded-lg overflow-hidden bg-black">
+                        <img src="https://placehold.co/600x300/000000/FFFFFF?text=Nurse+Calling+System+Demo" alt="Video Thumbnail" class="w-full opacity-70">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <button class="bg-white bg-opacity-20 rounded-full p-4 backdrop-blur-sm hover:bg-opacity-30 transition-all">
+                                <i class="fas fa-play text-white text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- More projects showcase -->
+            <div class="mt-16 max-w-6xl mx-auto">
+                <h3 class="text-2xl font-bold text-center mb-8 dark:text-white" data-aos="fade-up">Other Notable Projects</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                        <img src="https://placehold.co/400x250/ADD8E6/000000?text=AI+Diagnostics" alt="AI Diagnostics" class="w-full h-48 object-cover">
+                        <div class="project-overlay">
+                            <h4 class="font-bold text-lg mb-2">AI Diagnostic Assistant</h4>
+                            <p class="text-sm">Machine learning system for preliminary diagnosis</p>
+                        </div>
+                    </div>
+                    <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                        <img src="https://placehold.co/400x250/ADD8E6/000000?text=Telemedicine" alt="Telemedicine" class="w-full h-48 object-cover">
+                        <div class="project-overlay">
+                            <h4 class="font-bold text-lg mb-2">Rural Telemedicine Platform</h4>
+                            <p class="text-sm">Connecting remote patients with specialists</p>
+                        </div>
+                    </div>
+                    <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                        <img src="https://placehold.co/400x250/ADD8E6/000000?text=Med+Tracker" alt="Med Tracker" class="w-full h-48 object-cover">
+                        <div class="project-overlay">
+                            <h4 class="font-bold text-lg mb-2">Smart Medication Tracker</h4>
+                            <p class="text-sm">IoT solution for medication adherence</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 md:py-24 bg-gray-50 pattern-bg dark:bg-slate-900">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl section-heading text-center mb-12" data-aos="fade-up">My Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">Innovation & Product Development</h3>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar" style="width: 95%;"></div>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Expert in conceptualizing and bringing new technologies to life.</p>
+                </div>
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">Healthcare Technology Integration</h3>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar" style="width: 90%;"></div>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Proficient in integrating complex systems for optimal healthcare delivery.</p>
+                </div>
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">AI & Data-Driven Solutions</h3>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar" style="width: 85%;"></div>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Leveraging artificial intelligence for intelligent decision-making.</p>
+                </div>
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">Project Management & Leadership</h3>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar" style="width: 92%;"></div>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Leading teams and projects from ideation to successful deployment.</p>
+                </div>
+            </div>
+            
+            <!-- Additional skills as tags -->
+            <div class="mt-12" data-aos="fade-up" data-aos-delay="500">
+                <h3 class="text-xl font-semibold text-center mb-6 dark:text-white">Technical Expertise</h3>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <span class="px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">System Architecture</span>
+                    <span class="px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">IoT Solutions</span>
+                    <span class="px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">Machine Learning</span>
+                    <span class="px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">Cloud Computing</span>
+                    <span class="px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">UI/UX Design</span>
+                    <span class="px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">Data Analytics</span>
+                    <span class="px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">Cybersecurity</span>
+                    <span class="px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">Blockchain</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements & Recognition Section -->
+    <section id="achievements" class="py-16 md:py-24 bg-white dark:bg-slate-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl section-heading text-center mb-12" data-aos="fade-up">Achievements & Recognition</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+                <!-- Achievement Card 1: Prime Minister Presentation -->
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-center mb-4">
+                        <div class="bg-blue-100 dark:bg-blue-900 rounded-full p-4 inline-flex items-center justify-center mb-3">
+                            <i class="fas fa-award text-blue-600 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Presented to Prime Minister Dr. Abiy Ahmed Ali</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">
+                        Honored to present inaugural exhibition at Sensa Museum, a significant national event.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <span class="text-xs text-gray-500 dark:text-gray-400">May 2025</span>
+                    </div>
+                </div>
+
+                <!-- Achievement Card 2: Ministers Presentation -->
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-center mb-4">
+                        <div class="bg-blue-100 dark:bg-blue-900 rounded-full p-4 inline-flex items-center justify-center mb-3">
+                            <i class="fas fa-users text-blue-600 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Presented to Ministers of Innovation & Health</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">
+                        Showcased innovations to Dr. Belete Molla (Min. Innovation) and Dr. Mekdes Daba (Min. Health).
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <span class="text-xs text-gray-500 dark:text-gray-400">April 2025</span>
+                    </div>
+                </div>
+
+                <!-- Achievement Card 3: Ministry of Innovation Endorsement -->
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-center mb-4">
+                        <div class="bg-blue-100 dark:bg-blue-900 rounded-full p-4 inline-flex items-center justify-center mb-3">
+                            <i class="fas fa-stamp text-blue-600 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Ministry of Innovation & Technology Endorsement</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">
+                        ISHCS project officially endorsed, aligning with national priorities for healthcare tech.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <span class="text-xs text-gray-500 dark:text-gray-400">April 2025</span>
+                    </div>
+                </div>
+
+                <!-- Achievement Card 4: Global Health Innovation Summit -->
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-center mb-4">
+                        <div class="bg-blue-100 dark:bg-blue-900 rounded-full p-4 inline-flex items-center justify-center mb-3">
+                            <i class="fas fa-globe-africa text-blue-600 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Global Health Innovation & Quality Summit Presenter</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">
+                        Recognized for participation as a presenter at the summit, June 25-27.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <span class="text-xs text-gray-500 dark:text-gray-400">June 2025</span>
+                    </div>
+                </div>
+
+                <!-- Achievement Card 5: AI and Career Empowerment Certificate -->
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="500">
+                    <div class="text-center mb-4">
+                        <div class="bg-blue-100 dark:bg-blue-900 rounded-full p-4 inline-flex items-center justify-center mb-3">
+                            <i class="fas fa-certificate text-blue-600 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">AI and Career Empowerment Certificate</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">
+                        Successfully completed a non-credit course from University of Maryland, July 15, 2025.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <span class="text-xs text-gray-500 dark:text-gray-400">July 2025</span>
+                    </div>
+                </div>
+
+                <!-- Achievement Card 6: Nurse Calling System Copyright -->
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="600">
+                    <div class="text-center mb-4">
+                        <div class="bg-blue-100 dark:bg-blue-900 rounded-full p-4 inline-flex items-center justify-center mb-3">
+                            <i class="fas fa-copyright text-blue-600 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Nurse Calling System Copyright Registered</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">
+                        Copyright & Neighboring Rights Registration Certificate from Ethiopian Intellectual Property Authority.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <span class="text-xs text-gray-500 dark:text-gray-400">July 2023</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Official Endorsements & Certifications Section -->
+    <section id="documents" class="py-16 md:py-24 bg-gray-50 pattern-bg dark:bg-slate-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl section-heading text-center mb-12" data-aos="fade-up">Official Endorsements & Certifications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+                <!-- Document Card 1: Ministry of Innovation and Technology Endorsement -->
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-center mb-4">
+                        <div class="bg-blue-100 dark:bg-blue-900 rounded-lg p-4 inline-flex items-center justify-center mb-3">
+                            <i class="fas fa-file-signature text-blue-600 dark:text-blue-400 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-blue-700 dark:text-blue-400 mb-2">Ministry of Innovation and Technology Endorsement</h3>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
+                        Official endorsement for the Integrated Smart Healthcare Solutions (ISHCS) Project. Confirms alignment with national priorities and potential to enhance healthcare delivery.
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 text-xs space-y-1 mb-4">
+                        <li>Evaluated and aligns with national priorities.</li>
+                        <li>Focuses on nurse calling, EHR, RTLS, AI.</li>
+                        <li>Supports implementation in selected health facilities.</li>
+                    </ul>
+                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                        <span class="text-xs text-gray-500 dark:text-gray-400">Date: April 24, 2025</span>
+                        <button class="text-xs text-blue-600 dark:text-blue-400 hover:underline">View Document</button>
+                    </div>
+                </div>
+
+                <!-- Document Card 2: Ministry of Health Support Letter (Pilot Testing) -->
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-center mb-4">
+                        <div class="bg-blue-100 dark:bg-blue-900 rounded-lg p-4 inline-flex items-center justify-center mb-3">
+                            <i class="fas fa-file-alt text-blue-600 dark:text-blue-400 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-blue-700 dark:text-blue-400 mb-2">Ministry of Health Support Letter</h3>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
+                        Support for pilot testing of the Innovative Integrated Smart Nurse Calling System in Ethiopia. Highlights key benefits and seeks collaboration.
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 text-xs space-y-1 mb-4">
+                        <li>Supports ISHCS pilot testing.</li>
+                        <li>Aims to revolutionize healthcare delivery.</li>
+                        <li>Aligns with MoH national priority areas.</li>
+                    </ul>
+                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                        <span class="text-xs text-gray-500 dark:text-gray-400">Date: May 09, 2025</span>
+                        <button class="text-xs text-blue-600 dark:text-blue-400 hover:underline">View Document</button>
+                    </div>
+                </div>
+
+                <!-- Document Card 3: Addis Ababa City Administration Health Bureau Letter -->
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-center mb-4">
+                        <div class="bg-blue-100 dark:bg-blue-900 rounded-lg p-4 inline-flex items-center justify-center mb-3">
+                            <i class="fas fa-file-medical text-blue-600 dark:text-blue-400 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-blue-700 dark:text-blue-400 mb-2">Addis Ababa Health Bureau Support</h3>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
+                        Letter requesting assistance and support for the implementation of the Nurse Call System in health institutions.
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 text-xs space-y-1 mb-4">
+                        <li>Requests support for Nurse Call System implementation.</li>
+                        <li>Recognized by Ethiopian Intellectual Property Office.</li>
+                    </ul>
+                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                        <span class="text-xs text-gray-500 dark:text-gray-400">Date: April 04, 2023</span>
+                        <button class="text-xs text-blue-600 dark:text-blue-400 hover:underline">View Document</button>
+                    </div>
+                </div>
+
+                <!-- Document Card 4: Copyright & Neighboring Rights Registration Certificate -->
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-center mb-4">
+                        <div class="bg-blue-100 dark:bg-blue-900 rounded-lg p-4 inline-flex items-center justify-center mb-3">
+                            <i class="fas fa-certificate text-blue-600 dark:text-blue-400 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-blue-700 dark:text-blue-400 mb-2">Nurse Calling System Copyright Certificate</h3>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
+                        Official registration certificate for the "Nurse Calling System" as a computer program.
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 text-xs space-y-1 mb-4">
+                        <li>Owner: Amer Abdulla Mohammed.</li>
+                        <li>Type: Computer Program (Windows OS).</li>
+                        <li>Registration No: 5/0277.</li>
+                        <li>Expiry Date: July 18, 2028.</li>
+                    </ul>
+                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                        <span class="text-xs text-gray-500 dark:text-gray-400">Registration Date: July 19, 2023</span>
+                        <button class="text-xs text-blue-600 dark:text-blue-400 hover:underline">View Document</button>
+                    </div>
+                </div>
+
+                <!-- Document Card 5: Global Health Innovation Summit Certificate -->
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="500">
+                    <div class="text-center mb-4">
+                        <div class="bg-blue-100 dark:bg-blue-900 rounded-lg p-4 inline-flex items-center justify-center mb-3">
+                            <i class="fas fa-certificate text-blue-600 dark:text-blue-400 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-blue-700 dark:text-blue-400 mb-2">Global Health Innovation Summit Certificate</h3>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
+                        Certificate of participation as a presenter at the Global Health Innovation & Quality Summit.
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 text-xs space-y-1 mb-4">
+                        <li>Recognized as an innovator in healthcare technology.</li>
+                        <li>Presented ISHCS to international audience.</li>
+                    </ul>
+                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                        <span class="text-xs text-gray-500 dark:text-gray-400">Date: June 27, 2025</span>
+                        <button class="text-xs text-blue-600 dark:text-blue-400 hover:underline">View Document</button>
+                    </div>
+                </div>
+
+                <!-- Document Card 6: University of Maryland Certificate -->
+                <div class="card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="600">
+                    <div class="text-center mb-4">
+                        <div class="bg-blue-100 dark:bg-blue-900 rounded-lg p-4 inline-flex items-center justify-center mb-3">
+                            <i class="fas fa-university text-blue-600 dark:text-blue-400 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-blue-700 dark:text-blue-400 mb-2">AI and Career Empowerment Certificate</h3>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
+                        Certificate of completion for the AI and Career Empowerment non-credit course from University of Maryland.
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-400 text-xs space-y-1 mb-4">
+                        <li>Completed July 15, 2025.</li>
+                        <li>Covered AI fundamentals and applications.</li>
+                        <li>Career development in tech innovation.</li>
+                    </ul>
+                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                        <span class="text-xs text-gray-500 dark:text-gray-400">Date: July 15, 2025</span>
+                        <button class="text-xs text-blue-600 dark:text-blue-400 hover:underline">View Document</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 md:py-24 bg-white dark:bg-slate-900">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <h2 class="text-3xl md:text-4xl section-heading text-center mb-12" data-aos="fade-up">What Others Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="testimonial-card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://placehold.co/80x80/ADD8E6/000000?text=MoIT" alt="Organization 1 Logo" class="rounded-full mx-auto mb-4 shadow-sm">
+                    <p>"Amer Abdullah's Integrated Smart Healthcare Solutions project aligns perfectly with our national priorities to enhance healthcare delivery through technology. His work is truly impactful and demonstrates the innovative spirit we aim to foster in Ethiopia's tech ecosystem."</p>
+                    <div class="author">- Ministry of Innovation and Technology</div>
+                    <div class="title">Endorsement Letter, April 24, 2025</div>
+                    <div class="flex justify-center mt-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                </div>
+                <div class="testimonial-card dark:bg-slate-800" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://placehold.co/80x80/ADD8E6/000000?text=MoH" alt="Organization 2 Logo" class="rounded-full mx-auto mb-4 shadow-sm">
+                    <p>"We express our keen support for the implementation of this innovative solution. Collaborating with Amer will leverage invaluable expertise and technical resources to transform healthcare delivery in Ethiopia. His Nurse Calling System has the potential to significantly improve patient outcomes and operational efficiency in our health facilities."</p>
+                    <div class="author">- Ministry of Health - Ethiopia</div>
+                    <div class="title">Support Letter, May 09, 2025</div>
+                    <div class="flex justify-center mt-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star-half-alt text-yellow-400"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonial slider for mobile -->
+            <div class="mt-8 md:hidden relative overflow-hidden" data-aos="fade-up">
+                <div class="flex transition-transform duration-300 ease-in-out" id="testimonial-slider">
+                    <div class="min-w-full px-2">
+                        <div class="testimonial-card dark:bg-slate-800">
+                            <img src="https://placehold.co/80x80/ADD8E6/000000?text=MoIT" alt="Organization 1 Logo" class="rounded-full mx-auto mb-4 shadow-sm">
+                            <p>"Amer Abdullah's work is truly impactful and demonstrates the innovative spirit we aim to foster in Ethiopia's tech ecosystem."</p>
+                            <div class="author">- Ministry of Innovation and Technology</div>
+                            <div class="flex justify-center mt-2">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="min-w-full px-2">
+                        <div class="testimonial-card dark:bg-slate-800">
+                            <img src="https://placehold.co/80x80/ADD8E6/000000?text=MoH" alt="Organization 2 Logo" class="rounded-full mx-auto mb-4 shadow-sm">
+                            <p>"Collaborating with Amer will leverage invaluable expertise and technical resources to transform healthcare delivery in Ethiopia."</p>
+                            <div class="author">- Ministry of Health - Ethiopia</div>
+                            <div class="flex justify-center mt-2">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star-half-alt text-yellow-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center mt-4 space-x-2">
+                    <button class="testimonial-dot w-3 h-3 rounded-full bg-blue-200" data-index="0"></button>
+                    <button class="testimonial-dot w-3 h-3 rounded-full bg-blue-200" data-index="1"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="py-16 md:py-24 gradient-bg text-white text-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-6" data-aos="fade-up">Ready to Innovate Together?</h2>
+            <p class="text-xl md:text-2xl font-light mb-10" data-aos="fade-up" data-aos-delay="100">
+                Let's connect and explore how Raji Technology can bring your vision to life.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
+                <a href="#contact" class="btn-primary inline-block text-lg md:text-xl font-medium bg-white text-blue-600 hover:bg-gray-100 hover:text-blue-700">
+                    Start a Conversation <i class="fas fa-comments ml-2"></i>
+                </a>
+                <a href="#" class="inline-block text-lg md:text-xl font-medium border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-xl transition-all">
+                    Download Portfolio <i class="fas fa-download ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 md:py-24 bg-white dark:bg-slate-900">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <h2 class="text-3xl md:text-4xl section-heading text-center mb-12" data-aos="fade-up">Get in Touch</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="bg-gray-100 dark:bg-slate-800 p-8 rounded-xl shadow-lg" data-aos="fade-right">
+                    <h3 class="text-2xl font-bold mb-6 dark:text-white">Contact Information</h3>
+                    <p class="text-lg mb-8 dark:text-gray-300">
+                        Interested in collaborating or learning more about my work? Feel free to reach out through any of these channels:
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 dark:bg-blue-900 rounded-full p-3 mr-4 flex-shrink-0">
+                                <i class="fas fa-envelope text-blue-600 dark:text-blue-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold dark:text-white">Email</h4>
+                                <a href="mailto:amerabdulah634@gmail.com" class="text-blue-600 dark:text-blue-400 hover:underline">amerabdulah634@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 dark:bg-blue-900 rounded-full p-3 mr-4 flex-shrink-0">
+                                <i class="fas fa-phone-alt text-blue-600 dark:text-blue-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold dark:text-white">Phone</h4>
+                                <a href="tel:+251913395143" class="text-blue-600 dark:text-blue-400 hover:underline">+251913395143</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 dark:bg-blue-900 rounded-full p-3 mr-4 flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-blue-600 dark:text-blue-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold dark:text-white">Location</h4>
+                                <p class="text-gray-700 dark:text-gray-300">Addis Ababa, Ethiopia</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold mt-12 mb-6 dark:text-white">Follow Me</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-800 w-12 h-12 rounded-full flex items-center justify-center transition-colors">
+                            <i class="fab fa-linkedin-in text-xl"></i>
+                        </a>
+                        <a href="#" class="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-800 w-12 h-12 rounded-full flex items-center justify-center transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-800 w-12 h-12 rounded-full flex items-center justify-center transition-colors">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-800 w-12 h-12 rounded-full flex items-center justify-center transition-colors">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div data-aos="fade-left">
+                    <div class="bg-gray-100 dark:bg-slate-800 p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold mb-6 dark:text-white">Send Me a Message</h3>
+                        <form id="contact-form" class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your Name</label>
+                                <input type="text" id="name" name="name" class="form-input dark:bg-slate-700 dark:border-slate-600 dark:text-white" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your Email</label>
+                                <input type="email" id="email" name="email" class="form-input dark:bg-slate-700 dark:border-slate-600 dark:text-white" required>
+                            </div>
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subject</label>
+                                <input type="text" id="subject" name="subject" class="form-input dark:bg-slate-700 dark:border-slate-600 dark:text-white" required>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your Message</label>
+                                <textarea id="message" name="message" rows="5" class="form-input dark:bg-slate-700 dark:border-slate-600 dark:text-white" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary w-full text-lg font-medium mt-6">
+                                Send Message <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Contact info cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                        <div class="bg-blue-600 text-white p-4 rounded-lg flex items-center">
+                            <div class="bg-white bg-opacity-20 rounded-full p-3 mr-4">
+                                <i class="fas fa-headset text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Support</h4>
+                                <p class="text-sm opacity-80">24/7 available support</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-800 text-white p-4 rounded-lg flex items-center">
+                            <div class="bg-white bg-opacity-20 rounded-full p-3 mr-4">
+                                <i class="fas fa-briefcase text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Business</h4>
+                                <p class="text-sm opacity-80">business@rajitech.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Amer Abdullah</h3>
+                    <p class="text-sm opacity-80">Innovator and founder of Raji Technology, dedicated to revolutionizing healthcare through technology.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-sm opacity-80 hover:opacity-100 transition-opacity">About</a></li>
+                        <li><a href="#innovations" class="text-sm opacity-80 hover:opacity-100 transition-opacity">Innovations</a></li>
+                        <li><a href="#skills" class="text-sm opacity-80 hover:opacity-100 transition-opacity">Skills</a></li>
+                        <li><a href="#contact" class="text-sm opacity-80 hover:opacity-100 transition-opacity">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm opacity-80 hover:opacity-100 transition-opacity">Healthcare Tech</a></li>
+                        <li><a href="#" class="text-sm opacity-80 hover:opacity-100 transition-opacity">AI Solutions</a></li>
+                        <li><a href="#" class="text-sm opacity-80 hover:opacity-100 transition-opacity">System Integration</a></li>
+                        <li><a href="#" class="text-sm opacity-80 hover:opacity-100 transition-opacity">Consulting</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+                    <p class="text-sm opacity-80 mb-2">Subscribe to get updates on my latest innovations.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-3 py-2 text-sm text-gray-900 rounded-l focus:outline-none w-full">
+                        <button type="submit" class="bg-blue-800 hover:bg-blue-900 px-4 py-2 rounded-r text-sm">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-white border-opacity-20 mt-8 pt-8 text-center">
+                <p class="text-sm opacity-80">&copy; <span id="current-year"></span> Amer Abdullah. All rights reserved.</p>
+                <p class="text-xs mt-2 opacity-60">Built with passion and innovation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="hidden">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Get references to DOM elements
-        const recognizedTextDisplay = document.getElementById('recognizedTextDisplay');
-        const translatedTextDisplay = document.getElementById('translatedTextDisplay');
-        const messageDisplay = document.getElementById('messageDisplay');
-        const startButton = document.getElementById('startButton');
-        const stopButton = document.getElementById('stopButton');
-        const speakLanguageSelect = document.getElementById('speakLanguageSelect');
-        const translateLanguageSelect = document.getElementById('translateLanguageSelect');
-        const swapLanguagesButton = document.getElementById('swapLanguagesButton');
-        const securityWarning = document.getElementById('securityWarning');
-        const trySayingTitle = document.getElementById('trySayingTitle');
-        const trySayingExamples = document.getElementById('trySayingExamples');
+        // Initialize AOS animation library
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
 
-        // New flag display elements (now <img> tags)
-        const speakFlagDisplay = document.getElementById('speakFlagDisplay');
-        const translateFlagDisplay = document.getElementById('translateFlagDisplay');
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        let recognition = null;
-        let isListening = false;
-        let currentSpeakLanguage = "am-ET"; // Default input language
-        let currentTranslateLanguage = "om-ET"; // Default target language
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-        // Language mappings for display and LLM prompts
-        // Flags are now image URLs from placehold.co with more accurate colors
-        const languageMap = {
-            "am-ET": {
-                name: "Amharic",
-                nativeName: "አማርኛ",
-                flagImageUrl: "https://placehold.co/40x25/078930/FCD200?text=ET", // Ethiopia: Green background, Yellow text
-                examples: [
-                    { am: "ሰላም", en: "Hello" },
-                    { am: "እንዴት ነህ?", en: "How are you?" },
-                    { am: "አመሰግናለሁ", en: "Thank you" },
-                ]
-            },
-            "om-ET": {
-                name: "Afaan Oromoo",
-                nativeName: "Afaan Oromoo",
-                flagImageUrl: "https://placehold.co/40x25/078930/FCD200?text=ET", // Ethiopia: Green background, Yellow text
-                examples: [
-                    { om: "Nagaan", en: "Hello" },
-                    { om: "Akkam jirtu?", "en": "How are you?" },
-                    { om: "Galatoomaa", en: "Thank you" },
-                ]
-            },
-            "ti-ET": {
-                name: "Tigrinya",
-                nativeName: "ትግርኛ",
-                flagImageUrl: "https://placehold.co/40x25/078930/FCD200?text=ET", // Ethiopia: Green background, Yellow text
-                examples: [
-                    { ti: "ሰላም", en: "Hello" },
-                    { ti: "ከመይ ኣለኻ?", "en": "How are you?" },
-                    { ti: "የቐንየለይ", "en": "Thank you" },
-                ]
-            },
-            "so-SO": { // Using so-SO for broader Somali support, often works for Ethiopian Somali as well
-                name: "Somali",
-                nativeName: "Af Soomaali",
-                flagImageUrl: "https://placehold.co/40x25/4189DD/FFFFFF?text=SO", // Somalia: Light Blue background, White text
-                examples: [
-                    { so: "Assalaamu alaykum", en: "Hello" },
-                    { so: "Sidee tahay?", "en": "How are you?" },
-                    { so: "Mahadsanid", "en": "Thank you" },
-                ]
-            },
-            "ar-SA": { // Arabic (Saudi Arabia)
-                name: "Arabic",
-                nativeName: "العربية",
-                flagImageUrl: "https://placehold.co/40x25/006C35/FFFFFF?text=SA", // Saudi Arabia: Dark Green background, White text
-                examples: [
-                    { ar: "مرحبا", en: "Hello" },
-                    { ar: "كيف حالك؟", "en": "How are you?" },
-                    { ar: "شكرا لك", "en": "Thank you" },
-                ]
-            },
-            "hi-IN": { // Added Hindi (India)
-                name: "Hindi",
-                nativeName: "हिन्दी",
-                flagImageUrl: "https://placehold.co/40x25/FF9933/138808?text=IN", // India: Saffron background, Dark Green text
-                examples: [
-                    { hi: "नमस्ते", en: "Hello" },
-                    { hi: "आप कैसे हैं?", "en": "How are you?" },
-                    { hi: "धन्यवाद", "en": "Thank you" },
-                ]
-            },
-            "bn-IN": { // Added Bengali (India)
-                name: "Bengali",
-                nativeName: "বাংলা",
-                flagImageUrl: "https://placehold.co/40x25/FF9933/138808?text=IN", // India: Saffron background, Dark Green text
-                examples: [
-                    { bn: "নমস্কার", en: "Hello" },
-                    { bn: "কেমন আছেন?", "en": "How are you?" },
-                    { bn: "ধন্যবাদ", "en": "Thank you" },
-                ]
-            },
-            "fr-FR": { // Added French (France)
-                name: "French",
-                nativeName: "Français",
-                flagImageUrl: "https://placehold.co/40x25/002654/EF4135?text=FR", // France: Dark Blue background, Red text
-                examples: [
-                    { fr: "Bonjour", en: "Hello" },
-                    { fr: "Comment allez-vous?", "en": "How are you?" },
-                    { fr: "Merci", "en": "Thank you" },
-                ]
-            },
-            "en-US": { // A generic fallback for languages without specific codes or voices
-                name: "English (Fallback)",
-                nativeName: "English (Fallback)",
-                flagImageUrl: "https://placehold.co/40x25/B22234/002868?text=US", // USA: Red background, Blue text
-                examples: [
-                    { en: "Hello", en: "Hello" },
-                    { en: "How are you?", "en": "How are you?" },
-                    { en: "Thank you", "en": "Thank you" },
-                ]
-            }
-        };
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
 
-        // Populate the language select dropdowns
-        function populateLanguageSelects() {
-            speakLanguageSelect.innerHTML = ''; // Clear existing options for speak
-            translateLanguageSelect.innerHTML = ''; // Clear existing options for translate
+        // Hide mobile menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
 
-            for (const langCode in languageMap) {
-                const optionSpeak = document.createElement('option');
-                optionSpeak.value = langCode;
-                // Text content remains the same for dropdown options
-                optionSpeak.textContent = `${languageMap[langCode].nativeName} (${languageMap[langCode].name})`;
-                speakLanguageSelect.appendChild(optionSpeak);
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('back-to-top');
 
-                const optionTranslate = document.createElement('option');
-                optionTranslate.value = langCode;
-                // Text content remains the same for dropdown options
-                optionTranslate.textContent = `${languageMap[langCode].nativeName} (${languageMap[langCode].name})`;
-                translateLanguageSelect.appendChild(optionTranslate);
-            }
-            // Set initial selections
-            speakLanguageSelect.value = currentSpeakLanguage;
-            translateLanguageSelect.value = currentTranslateLanguage;
-        }
-
-        // Function to update the displayed flag next to the select box
-        function updateFlagDisplay(selectElement, flagDisplayElement) {
-            const selectedLangCode = selectElement.value;
-            const imageUrl = languageMap[selectedLangCode]?.flagImageUrl || ''; // Get image URL, or empty string if not found
-            flagDisplayElement.src = imageUrl;
-            flagDisplayElement.alt = `${languageMap[selectedLangCode]?.name || 'Unknown'} Flag`;
-            // Add an onerror handler for fallback text if image fails to load
-            flagDisplayElement.onerror = () => {
-                flagDisplayElement.alt = `Flag not found for ${languageMap[selectedLangCode]?.name || 'Unknown'}`;
-                flagDisplayElement.src = "https://placehold.co/40x25/CCCCCC/666666?text=N/A"; // Generic fallback image
-            };
-        }
-
-        // Initialize SpeechSynthesis
-        const synth = window.speechSynthesis;
-        let voicesLoaded = false;
-        let availableVoices = {}; // Store voices keyed by lang code
-
-        // Function to find available voices
-        function findVoices() {
-            const voices = synth.getVoices();
-            availableVoices = {}; // Reset
-            for (const langCode in languageMap) {
-                const voice = voices.find(v => v.lang === langCode) ||
-                                 voices.find(v => v.lang.startsWith(langCode.substring(0, 2))) ||
-                                 voices.find(v => v.lang === 'en-US'); // Fallback to English
-                if (voice) {
-                    availableVoices[langCode] = voice;
-                } else {
-                    console.warn(`No specific voice found for ${langCode} (${languageMap[langCode]?.name}). Falling back to default browser voice (likely English).`);
-                    availableVoices[langCode] = voices.find(v => v.lang === 'en-US') || voices[0]; // Ensure a voice is always assigned
-                }
-            }
-            voicesLoaded = true;
-        }
-
-        // Populate voices when they are loaded
-        if (synth.onvoiceschanged !== undefined) {
-            synth.onvoiceschanged = () => {
-                findVoices();
-                console.log("SpeechSynthesis voices loaded and mapped.");
-            };
-        }
-        // Call immediately in case voices are already loaded
-        findVoices();
-
-        // Function to update button states
-        function updateButtonState() {
-            startButton.disabled = isListening;
-            stopButton.disabled = !isListening;
-            speakLanguageSelect.disabled = isListening;
-            translateLanguageSelect.disabled = isListening;
-            swapLanguagesButton.disabled = isListening;
-
-            if (isListening) {
-                startButton.classList.remove('btn-primary');
-                startButton.classList.add('bg-gray-400', 'cursor-not-allowed');
-                stopButton.classList.remove('bg-gray-400', 'cursor-not-allowed');
-                stopButton.classList.add('btn-danger');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
             } else {
-                startButton.classList.remove('bg-gray-400', 'cursor-not-allowed');
-                startButton.classList.add('btn-primary');
-                stopButton.classList.remove('btn-danger');
-                stopButton.classList.add('bg-gray-400', 'cursor-not-allowed');
+                backToTopButton.style.display = 'none';
             }
-        }
+            
+            // Add scrolled class to navbar
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
 
-        // Function to update the "Try saying" examples based on the current input language
-        function updateTrySayingExamples() {
-            const inputLangData = languageMap[currentSpeakLanguage];
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
 
-            trySayingTitle.textContent = `Try saying in ${inputLangData.name}:`;
-            trySayingExamples.innerHTML = ''; // Clear existing examples
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
 
-            // Display examples for the current input language
-            if (inputLangData.examples) {
-                inputLangData.examples.forEach(example => {
-                    const li = document.createElement('li');
-                    // Find the key for the current input language (e.g., 'am', 'om', 'ti', 'so', 'ar', 'hi', 'bn', 'fr')
-                    const langKey = Object.keys(example).find(key => key !== 'en');
-                    if (langKey && example[langKey]) {
-                        li.textContent = `"${example[langKey]}" (${example.en})`;
-                    } else if (example.en) { // Fallback to English example if specific one not found
-                             li.textContent = `"${example.en}" (English)`;
-                    }
-                    trySayingExamples.appendChild(li);
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
-            }
+            });
+        });
+
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const mobileDarkModeToggle = document.getElementById('mobile-dark-mode-toggle');
+        
+        // Check for saved user preference or use system preference
+        if (localStorage.getItem('darkMode') === 'enabled' || 
+            (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.body.classList.add('dark');
+            darkModeToggle.checked = true;
+            mobileDarkModeToggle.checked = true;
         }
-
-        // Function to show a loading spinner
-        function showLoading(elementId) {
-            const element = document.getElementById(elementId);
-            if (element) {
-                element.innerHTML = `<span class="spinner"></span>`;
-            }
-        }
-
-        // Function to remove loading spinner and set text
-        function hideLoading(elementId, content) {
-            const element = document.getElementById(elementId);
-            if (element) {
-                element.textContent = content;
-            }
-        }
-
-        // Function to speak the translated text
-        function speakTranslatedText(text, lang) {
-            if (synth.speaking) {
-                synth.cancel(); // Stop any ongoing speech
-            }
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang; // Set language to the output language
-
-            let voiceUsed = availableVoices[lang];
-            if (voiceUsed) {
-                utterance.voice = voiceUsed;
+        
+        darkModeToggle.addEventListener('change', () => {
+            if (darkModeToggle.checked) {
+                document.body.classList.add('dark');
+                localStorage.setItem('darkMode', 'enabled');
             } else {
-                console.warn(`No specific voice found for ${lang}. Using default.`);
-                // Fallback to a generic voice if no specific one is found
-                voiceUsed = synth.getVoices().find(v => v.lang.startsWith(lang.substring(0, 2))) || synth.getVoices().find(v => v.lang === 'en-US') || synth.getVoices()[0];
-                if (voiceUsed) {
-                    utterance.voice = voiceUsed;
-                }
+                document.body.classList.remove('dark');
+                localStorage.setItem('darkMode', 'disabled');
             }
+            mobileDarkModeToggle.checked = darkModeToggle.checked;
+        });
+        
+        mobileDarkModeToggle.addEventListener('change', () => {
+            if (mobileDarkModeToggle.checked) {
+                document.body.classList.add('dark');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                document.body.classList.remove('dark');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+            darkModeToggle.checked = mobileDarkModeToggle.checked;
+        });
 
-            utterance.pitch = 1;
-            utterance.rate = 1;
-
-            utterance.onstart = () => {
-                messageDisplay.textContent = 'Speaking translation...';
-            };
-            utterance.onend = () => {
-                messageDisplay.textContent = 'Translation spoken.';
-                // Add a warning if a non-native voice was used for speech
-                if (voiceUsed && !voiceUsed.lang.startsWith(lang.substring(0, 2))) {
-                    messageDisplay.textContent += ` (Note: Native voice for ${languageMap[lang]?.name || lang} not found. Using ${voiceUsed.name}.)`;
-                }
-            };
-            utterance.onerror = (event) => {
-                console.error('Speech synthesis error:', event);
-                messageDisplay.textContent = `Speech error: ${event.error}.`;
-            };
-
-            synth.speak(utterance);
-        }
-
-        // Function to call the LLM for translation
-        async function getTranslationFromLLM(text, sourceLangCode, targetLangCode) {
-            const sourceLangName = languageMap[sourceLangCode]?.name || sourceLangCode;
-            const targetLangName = languageMap[targetLangCode]?.name || targetLangCode;
-
-            const prompt = `Translate the following ${sourceLangName} text to ${targetLangName}. Provide only the translated text. Respond strictly in JSON format with a single key "translation".
-            ${sourceLangName}: "${text}"
-            Example: {"translation": "${targetLangName} translation here"}`;
-
-            showLoading('translatedTextDisplay'); // Show spinner in translation area
-            messageDisplay.textContent = 'Translating...'; // Indicate translation is in progress
-
-            try {
-                let chatHistory = [];
-                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-                const payload = {
-                    contents: chatHistory,
-                    generationConfig: {
-                        responseMimeType: "application/json",
-                        responseSchema: {
-                            type: "OBJECT",
-                            properties: {
-                                "translation": { "type": "STRING" }
-                            },
-                            "propertyOrdering": ["translation"]
-                        }
+        // Stats counter animation
+        const statNumbers = document.querySelectorAll('.stat-number');
+        
+        const animateStats = () => {
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-count'));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const updateCount = () => {
+                    current += step;
+                    if (current < target) {
+                        stat.textContent = Math.floor(current);
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        stat.textContent = target + '+';
                     }
                 };
-                // Using the API key provided by the user directly in the URL.
-                const apiKey = "AIzaSyAp4UwDbRMRagOMp4EUAz8YdVpXATm0rWg";
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-                console.log('API URL being used:', apiUrl); // Log the URL for debugging
-
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                const rawResponseText = await response.text();
-                console.log('Raw API response text:', rawResponseText);
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}, message: ${rawResponseText}`);
-                }
-
-                let result;
-                try {
-                    result = JSON.parse(rawResponseText);
-                } catch (jsonParseError) {
-                    console.error('Error parsing outer API response as JSON:', jsonParseError, 'Raw response:', rawResponseText);
-                    throw new Error('Invalid JSON response from API. Check console for raw response.');
-                }
-
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
-                    const llmGeneratedJsonString = result.candidates[0].content.parts[0].text;
-                    let parsedLLMContent;
-                    try {
-                        parsedLLMContent = JSON.parse(llmGeneratedJsonString);
-                    } catch (llmJsonParseError) {
-                        console.error('Error parsing LLM generated JSON content:', llmJsonParseError, 'LLM JSON string:', llmGeneratedJsonString);
-                        throw new Error('LLM generated invalid JSON. Check console for LLM content.');
-                    }
-                    return parsedLLMContent.translation || 'Translation not available.';
-                } else {
-                    console.error('LLM response structure unexpected or empty candidates/content:', result);
-                    return 'Translation not available.';
-                }
-            } catch (error) {
-                console.error('Error in getTranslationFromLLM:', error);
-                messageDisplay.textContent = `Translation failed: ${error.message || 'Unknown error'}. Please try again.`;
-                return 'Translation failed.';
-            } finally {
-                // Ensure loading spinner is hidden even if there's an error
-                if (translatedTextDisplay.querySelector('.spinner')) {
-                    hideLoading('translatedTextDisplay', 'Translation will appear here.');
-                }
-            }
-        }
-
-
-        // Initialize SpeechRecognition when the window loads
-        window.onload = function() {
-            if (window.isSecureContext) {
-                console.log("Running in a secure context (HTTPS/localhost). Speech APIs should work.");
-            } else {
-                console.warn("Running in an insecure context (e.g., file://). Speech APIs may not function.");
-                securityWarning.classList.remove('hidden');
-            }
-
-            // Populate the language dropdowns first
-            populateLanguageSelects();
-            
-            // Set initial output language for translation based on input language
-            // If Amharic is the input, set Oromoo as output. Otherwise, set Amharic as output.
-            if (currentSpeakLanguage === "am-ET") {
-                currentTranslateLanguage = "om-ET";
-            } else {
-                currentTranslateLanguage = "am-ET";
-            }
-            translateLanguageSelect.value = currentTranslateLanguage; // Update the UI
-
-            // Update initial flag displays
-            updateFlagDisplay(speakLanguageSelect, speakFlagDisplay);
-            updateFlagDisplay(translateLanguageSelect, translateFlagDisplay);
-
-            // Update "Try saying" examples initially
-            updateTrySayingExamples();
-
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-            if (!SpeechRecognition) {
-                messageDisplay.textContent = 'Speech Recognition is not supported by your browser. Please use Chrome or Edge.';
-                startButton.disabled = true;
-                stopButton.disabled = true;
-                speakLanguageSelect.disabled = true;
-                translateLanguageSelect.disabled = true;
-                swapLanguagesButton.disabled = true;
-                updateButtonState();
-                return;
-            }
-
-            recognition = new SpeechRecognition();
-            recognition.continuous = false; // Set to false for single utterance recognition
-            recognition.interimResults = false; // We only care about the final result
-            
-            // Set initial language based on the speakLanguageSelect element
-            recognition.lang = currentSpeakLanguage;
-
-            // Event handler for when speech recognition starts
-            recognition.onstart = () => {
-                isListening = true;
-                updateButtonState();
-                recognizedTextDisplay.textContent = 'Listening... Speak now.';
-                translatedTextDisplay.textContent = 'Translation will appear here.';
-                messageDisplay.textContent = 'Microphone is on.';
-                showLoading('recognizedTextDisplay'); // Show spinner when listening
-            };
-
-            // Event handler for when speech recognition gets a result
-            recognition.onresult = async (event) => {
-                const transcript = event.results[0][0].transcript;
-                hideLoading('recognizedTextDisplay', `${languageMap[currentSpeakLanguage].name}: "${transcript}"`); // Hide spinner and display recognized text
-
-                messageDisplay.textContent = 'Text recognized. Translating...';
-
-                const translatedText = await getTranslationFromLLM(transcript, currentSpeakLanguage, currentTranslateLanguage);
-                hideLoading('translatedTextDisplay', `${languageMap[currentTranslateLanguage].name}: "${translatedText}"`); // Hide spinner and display translated text
-
-                if (translatedText && translatedText !== 'Translation not available.' && translatedText !== 'Translation failed.') {
-                    speakTranslatedText(translatedText, currentTranslateLanguage);
-                } else {
-                    messageDisplay.textContent = 'Translation failed or not available for speech.';
-                }
-            };
-
-            // Event handler for when speech recognition ends (either naturally or by stop button)
-            recognition.onend = () => {
-                isListening = false;
-                updateButtonState();
-                if (!messageDisplay.textContent.includes('Speech error') && !messageDisplay.textContent.includes('Translation failed')) {
-                    messageDisplay.textContent = 'Ready to listen.';
-                }
-                // Ensure spinners are hidden if recognition ended without a result or error
-                if (recognizedTextDisplay.querySelector('.spinner')) {
-                    hideLoading('recognizedTextDisplay', 'Speak here...');
-                }
-                if (translatedTextDisplay.querySelector('.spinner')) {
-                    hideLoading('translatedTextDisplay', 'Translation will appear here.');
-                }
-            };
-
-            // Event handler for speech recognition errors
-            recognition.onerror = (event) => {
-                isListening = false;
-                updateButtonState();
-                console.error('Speech recognition error:', event);
-                messageDisplay.textContent = `Speech error: ${event.error}. Please try again or check microphone permissions.`;
-                hideLoading('recognizedTextDisplay', 'Error listening. Click Start Listening.');
-                hideLoading('translatedTextDisplay', 'Translation will appear here.');
-            };
-
-            // Event Listeners for Buttons
-            startButton.addEventListener('click', () => {
-                if (recognition && !isListening) {
-                    recognition.lang = currentSpeakLanguage; // Ensure language is set before starting
-                    recognition.start();
-                }
+                
+                updateCount();
             });
-
-            stopButton.addEventListener('click', () => {
-                if (recognition && isListening) {
-                    recognition.stop();
-                    messageDisplay.textContent = 'Stopped listening.';
-                }
-            });
-
-            // Event Listeners for Language Selects
-            speakLanguageSelect.addEventListener('change', (event) => {
-                currentSpeakLanguage = event.target.value;
-                updateFlagDisplay(speakLanguageSelect, speakFlagDisplay);
-                updateTrySayingExamples(); // Update examples when speak language changes
-                if (recognition) {
-                    recognition.lang = currentSpeakLanguage; // Update recognition language
-                }
-                messageDisplay.textContent = `Speak language changed to ${languageMap[currentSpeakLanguage].name}.`;
-            });
-
-            translateLanguageSelect.addEventListener('change', (event) => {
-                currentTranslateLanguage = event.target.value;
-                updateFlagDisplay(translateLanguageSelect, translateFlagDisplay);
-                messageDisplay.textContent = `Translate to language changed to ${languageMap[currentTranslateLanguage].name}.`;
-            });
-
-            // Event Listener for Swap Languages Button
-            swapLanguagesButton.addEventListener('click', () => {
-                const tempSpeakLang = currentSpeakLanguage;
-                currentSpeakLanguage = currentTranslateLanguage;
-                currentTranslateLanguage = tempSpeakLang;
-
-                // Update select elements
-                speakLanguageSelect.value = currentSpeakLanguage;
-                translateLanguageSelect.value = currentTranslateLanguage;
-
-                // Update flag displays
-                updateFlagDisplay(speakLanguageSelect, speakFlagDisplay);
-                updateFlagDisplay(translateLanguageSelect, translateFlagDisplay);
-
-                // Update "Try saying" examples
-                updateTrySayingExamples();
-
-                // Update recognition language if active
-                if (recognition) {
-                    recognition.lang = currentSpeakLanguage;
-                }
-
-                messageDisplay.textContent = `Languages swapped. Now speaking ${languageMap[currentSpeakLanguage].name} and translating to ${languageMap[currentTranslateLanguage].name}.`;
-            });
-
-            // Initial button state update
-            updateButtonState();
         };
+        
+        // Only animate when stats are in view
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        document.querySelector('.stat-item').parentElement.style.opacity = 1;
+        statsObserver.observe(document.querySelector('.stat-item').parentElement);
+
+        // Testimonial slider
+        let currentTestimonial = 0;
+        const testimonialSlider = document.getElementById('testimonial-slider');
+        const testimonialDots = document.querySelectorAll('.testimonial-dot');
+        
+        function showTestimonial(index) {
+            testimonialSlider.style.transform = `translateX(-${index * 100}%)`;
+            currentTestimonial = index;
+            
+            // Update dots
+            testimonialDots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.add('bg-blue-600');
+                    dot.classList.remove('bg-blue-200');
+                } else {
+                    dot.classList.add('bg-blue-200');
+                    dot.classList.remove('bg-blue-600');
+                }
+            });
+        }
+        
+        testimonialDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                showTestimonial(parseInt(dot.getAttribute('data-index')));
+            });
+        });
+        
+        // Auto-rotate testimonials
+        setInterval(() => {
+            const nextTestimonial = (currentTestimonial + 1) % testimonialDots.length;
+            showTestimonial(nextTestimonial);
+        }, 5000);
+
+        // Form submission
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+            
+            // Here you would typically send the data to a server
+            console.log('Form submitted:', data);
+            
+            // Show success message
+            alert('Thank you for your message! I will get back to you soon.');
+            contactForm.reset();
+        });
+
+        // Skill bar animation
+        const skillBars = document.querySelectorAll('.skill-bar');
+        
+        const animateSkillBars = () => {
+            skillBars.forEach(bar => {
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = bar.parentElement.nextElementSibling.textContent.includes('95%') ? '95%' : 
+                                      bar.parentElement.nextElementSibling.textContent.includes('90%') ? '90%' :
+                                      bar.parentElement.nextElementSibling.textContent.includes('85%') ? '85%' : '92%';
+                }, 100);
+            });
+        };
+        
+        // Only animate when skills are in view
+        const skillsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateSkillBars();
+                    skillsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        skillsObserver.observe(document.querySelector('#skills'));
     </script>
 </body>
 </html>
