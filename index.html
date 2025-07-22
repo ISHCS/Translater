@@ -574,12 +574,9 @@
                         }
                     }
                 };
-                // IMPORTANT: As per Canvas instructions for gemini-2.0-flash,
-                // leave apiKey as an empty string. Canvas will automatically provide it at runtime.
-                // We are removing the '?key=${apiKey}' from the URL to avoid potential conflicts
-                // with Canvas's automatic API key injection.
-                const apiKey = ""; // Leave this as an empty string
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`; // Remove ?key=${apiKey}
+                // Using the API key provided by the user directly in the URL.
+                const apiKey = "AIzaSyAp4UwDbRMRagOMp4EUAz8YdVpXATm0rWg"; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
                 const response = await fetch(apiUrl, {
                     method: 'POST',
