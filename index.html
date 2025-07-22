@@ -574,10 +574,8 @@
                         }
                     }
                 };
-                // IMPORTANT: If running this code outside of the Canvas environment (e.g., as a local HTML file),
-                // you MUST replace the empty string below with your actual Gemini API key.
-                // When running within the Canvas, leave it as an empty string.
-                const apiKey = ""; // API key is now an empty string as per instructions
+                // Get API key from Canvas environment if available, otherwise default to empty string
+                const apiKey = typeof __api_key !== 'undefined' ? __api_key : ''; 
                 // The API key must be passed as a query parameter for this endpoint.
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
@@ -585,7 +583,6 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
-                        // Removed 'X-goog-api-key' header as per API requirements for query parameter key
                     },
                     body: JSON.stringify(payload)
                 });
