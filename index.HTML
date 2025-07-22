@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovator Amer Abdullah: Revolutionizing Ethiopian Healthcare</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px; /* Adjusted for responsiveness */
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px; /* Adjusted for responsiveness */
+            }
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        /* New style for endorsement cards to add hover effect */
+        .endorsement-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .endorsement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #7A5195;
+            border: 4px solid #f0f4f8;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-[#003F5C] text-white text-center py-12 px-4">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-2">Amer Abdullah: Innovating Ethiopia's Healthcare Future</h1>
+        <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-200">A visual journey through the development, endorsement, and impact of a pioneering healthcare technology initiative.</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="lg:col-span-3 card">
+                <h2 class="text-2xl font-bold text-[#003F5C] mb-4 text-center">The Flagship Innovation: Integrated Smart Healthcare Solutions (ISHCS)</h2>
+                <p class="text-center max-w-4xl mx-auto mb-6">The ISHCS project, founded by Amer Abdullah of Raji Technology, is a comprehensive system designed to modernize healthcare delivery. It integrates multiple technologies to create a seamless, efficient, and safer patient care environment.</p>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-4 text-center">
+                    <div class="p-4 bg-gray-50 rounded-lg w-full md:w-1/4">
+                        <span class="text-4xl">📞</span>
+                        <h3 class="font-bold mt-2">Nurse Calling System</h3>
+                    </div>
+                    <div class="text-2xl font-bold text-[#7A5195]">+</div>
+                    <div class="p-4 bg-gray-50 rounded-lg w-full md:w-1/4">
+                        <span class="text-4xl">📋</span>
+                        <h3 class="font-bold mt-2">Electronic Health Records (EHR)</h3>
+                    </div>
+                    <div class="text-2xl font-bold text-[#7A5195]">+</div>
+                    <div class="p-4 bg-gray-50 rounded-lg w-full md:w-1/4">
+                        <span class="text-4xl">📍</span>
+                        <h3 class="font-bold mt-2">Real-Time Location Systems (RTLS)</h3>
+                    </div>
+                    <div class="text-2xl font-bold text-[#7A5195]">+</div>
+                    <div class="p-4 bg-gray-50 rounded-lg w-full md:w-1/4">
+                        <span class="text-4xl">🤖</span>
+                        <h3 class="font-bold mt-2">AI-Powered Solutions</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 card">
+                <h2 class="text-2xl font-bold text-[#003F5C] mb-4">Projected Impact & Key Benefits</h2>
+                <p class="mb-4">The ISHCS project is designed to deliver tangible improvements across the healthcare spectrum. The integrated approach targets critical areas, from patient communication to operational efficiency, with the ultimate goal of enhancing patient outcomes.</p>
+                <div class="chart-container">
+                    <canvas id="benefitsChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="text-2xl font-bold text-[#003F5C] mb-4">Core Expertise</h2>
+                <p class="mb-4">Amer Abdullah's capabilities are built on a foundation of technology, innovation, and strategic communication, validated by practical application and continuous learning.</p>
+                <div class="chart-container">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-3 card">
+                <h2 class="text-2xl font-bold text-[#003F5C] mb-6 text-center">A Timeline of Innovation & Recognition</h2>
+                <div class="relative pl-8 border-l-2 border-gray-200">
+                    <div class="timeline-item mb-10 ml-4">
+                        <h3 class="text-lg font-semibold text-[#7A5195]">October 20, 2022</h3>
+                        <p class="text-md">The Ministry of Health evaluates and provides a letter of support for the initial "Nurse Call System," recognizing its potential service to the health sector.</p>
+                    </div>
+                    <div class="timeline-item mb-10 ml-4">
+                        <h3 class="text-lg font-semibold text-[#7A5195]">April 4, 2023</h3>
+                        <p class="text-md">The Addis Ababa City Administration Health Bureau issues a letter requesting cooperation and support for the system's implementation.</p>
+                    </div>
+                    <div class="timeline-item mb-10 ml-4">
+                        <h3 class="text-lg font-semibold text-[#7A5195]">July 19, 2023</h3>
+                        <p class="text-md">The "Nurse Calling System" is officially registered and receives a Copyright & Neighboring Rights Registration Certificate from the Ethiopian Intellectual Property Authority.</p>
+                    </div>
+                    <div class="timeline-item mb-10 ml-4">
+                        <h3 class="text-lg font-semibold text-[#7A5195]">April 24, 2025</h3>
+                        <p class="text-md">The Ministry of Innovation and Technology formally endorses the full ISHCS project, confirming its alignment with national healthcare technology priorities.</p>
+                    </div>
+                    <div class="timeline-item mb-10 ml-4">
+                        <h3 class="text-lg font-semibold text-[#7A5195]">May 9, 2025</h3>
+                        <p class="text-md">The Ministry of Health requests support from the World Health Organization (WHO) for the pilot testing phase of the innovative system.</p>
+                    </div>
+                    <div class="timeline-item ml-4">
+                        <h3 class="text-lg font-semibold text-[#7A5195]">July 15, 2025</h3>
+                        <p class="text-md">Successfully completes the "AI and Career Empowerment" course from the University of Maryland, further strengthening the project's AI foundations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-3 card">
+                <h2 class="text-2xl font-bold text-[#003F5C] mb-4 text-center">Official Endorsements & Support</h2>
+                <p class="text-center max-w-4xl mx-auto mb-6">The ISHCS project is not just an idea; it's a nationally recognized initiative backed by key government bodies, highlighting its strategic importance for Ethiopia.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mb-6">
+                    <div class="p-6 bg-[#003F5C] text-white rounded-lg endorsement-card">
+                        <h3 class="font-bold text-lg mb-2">Ministry of Innovation & Technology</h3>
+                        <p class="text-sm text-gray-200">Confirmed the project aligns with national priorities and supports its implementation in health facilities.</p>
+                    </div>
+                    <div class="p-6 bg-[#7A5195] text-white rounded-lg endorsement-card">
+                        <h3 class="font-bold text-lg mb-2">Ministry of Health</h3>
+                        <p class="text-sm text-gray-200">Expressed keen support for the solution and requested technical and financial funding for pilot testing.</p>
+                    </div>
+                    <div class="p-6 bg-[#EF5675] text-white rounded-lg endorsement-card">
+                        <h3 class="font-bold text-lg mb-2">Addis Ababa Health Bureau</h3>
+                        <p class="text-sm text-gray-200">Requested cooperation and support from institutions to assist in the implementation of the innovative system.</p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button id="getInsightBtn" class="bg-[#FFA600] hover:bg-[#FF764A] text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out">
+                        ✨ Get Innovation Insight ✨
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-[#003F5C] text-white text-center mt-8 py-6 px-4">
+        <p>This infographic summarizes the documented achievements of Amer Abdullah and the Integrated Smart Healthcare Solutions (ISHCS) project.</p>
+    </footer>
+
+    <!-- The Modal -->
+    <div id="insightModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h3 class="text-xl font-bold text-[#003F5C] mb-4">Innovation Insight</h3>
+            <p id="insightText" class="text-gray-700"></p>
+            <div id="loadingIndicator" class="hidden mt-4">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-[#7A5195] mx-auto"></div>
+                <p class="text-sm text-gray-600 mt-2">Generating insight...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Helper function to wrap chart labels for better display
+        function wrapLabels(label, maxWidth) {
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + words[i].length + 1 < maxWidth) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // Custom tooltip title callback to unwrap labels for tooltips
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+
+        // Data for the Benefits Bar Chart
+        const benefitsData = {
+            labels: [
+                wrapLabels('Enhanced Patient-Provider Communication', 16),
+                wrapLabels('Streamlined Workflows for Staff', 16),
+                wrapLabels('Reduced Medication Errors', 16),
+                wrapLabels('Data-Driven Decision-Making', 16),
+                wrapLabels('Potential Reduction in Hospital Mortality', 16)
+            ],
+            datasets: [{
+                label: 'Projected Impact Level',
+                data: [90, 85, 88, 82, 78],
+                backgroundColor: ['#374C80', '#7A5195', '#BC5090', '#EF5675', '#FF764A'],
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        };
+
+        // Render the Benefits Bar Chart
+        const benefitsCtx = document.getElementById('benefitsChart').getContext('2d');
+        new Chart(benefitsCtx, {
+            type: 'bar',
+            data: benefitsData,
+            options: {
+                indexAxis: 'y', // Horizontal bar chart
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false // Hide legend for this chart
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback // Use custom tooltip title
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                           display: false // Hide x-axis ticks
+                        },
+                        grid: {
+                            display: false, // Hide x-axis grid lines
+                            drawBorder: false, // Hide x-axis border
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: '#003F5C', // Color of y-axis labels
+                            font: {
+                                weight: 'bold' // Bold y-axis labels
+                            }
+                        },
+                        grid: {
+                            display: false, // Hide y-axis grid lines
+                            drawBorder: false, // Hide y-axis border
+                        }
+                    }
+                }
+            }
+        });
+
+        // Data for the Skills Doughnut Chart
+        const skillsData = {
+            labels: ['Healthcare Innovation', 'AI & Technology', 'Endorsement & Pitching', 'Project Management'],
+            datasets: [{
+                label: 'Skill Distribution',
+                data: [40, 25, 20, 15],
+                backgroundColor: ['#003F5C', '#7A5195', '#EF5675', '#FFA600'],
+                hoverOffset: 4
+            }]
+        };
+
+        // Render the Skills Doughnut Chart
+        const skillsCtx = document.getElementById('skillsChart').getContext('2d');
+        new Chart(skillsCtx, {
+            type: 'doughnut',
+            data: skillsData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom', // Position legend at the bottom
+                        labels: {
+                            color: '#003F5C', // Color of legend labels
+                            font: {
+                                weight: '500' // Medium weight for legend labels
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback // Use custom tooltip title
+                        }
+                    }
+                }
+            }
+        });
+
+        // LLM Integration for Innovation Insight
+        const getInsightBtn = document.getElementById('getInsightBtn');
+        const insightModal = document.getElementById('insightModal');
+        const insightText = document.getElementById('insightText');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+
+        getInsightBtn.addEventListener('click', async () => {
+            insightModal.style.display = 'flex'; // Show the modal
+            insightText.textContent = ''; // Clear previous insight
+            loadingIndicator.classList.remove('hidden'); // Show loading indicator
+
+            // Static insight message (no API call)
+            const staticInsight = `Amer Abdullah's ISHCS project is a pivotal innovation for Ethiopian healthcare, integrating smart solutions like Nurse Calling, EHR, RTLS, and AI to significantly enhance patient care, streamline operations, and improve health outcomes. Its strong national endorsements underscore its potential to revolutionize the sector.`;
+            
+            // Simulate a small delay to show the loading indicator briefly
+            setTimeout(() => {
+                insightText.textContent = staticInsight; // Display the static insight
+                loadingIndicator.classList.add('hidden'); // Hide loading indicator
+            }, 500); // 500ms delay
+
+        });
+
+        // Function to close the modal
+        function closeModal() {
+            insightModal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == insightModal) {
+                insightModal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
