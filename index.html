@@ -574,9 +574,9 @@
                         }
                     }
                 };
-                // Get API key from Canvas environment if available, otherwise default to empty string
-                const apiKey = typeof __api_key !== 'undefined' ? __api_key : ''; 
-                // The API key must be passed as a query parameter for this endpoint.
+                // IMPORTANT: As per Canvas instructions for gemini-2.0-flash,
+                // leave apiKey as an empty string. Canvas will automatically provide it at runtime.
+                const apiKey = ""; 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
                 const response = await fetch(apiUrl, {
