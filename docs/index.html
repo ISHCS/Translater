@@ -340,7 +340,7 @@
                 examples: [
                     { hi: "नमस्ते", en: "Hello" },
                     { hi: "आप कैसे हैं?", "en": "How are you?" },
-                    { hi: "धन्यवाद", "en": "Thank you" },
+                    { hi: "धन्यवाद", en: "Thank you" },
                 ]
             },
             "bn-IN": { // Added Bengali (India)
@@ -420,10 +420,10 @@
         function findVoices() {
             const voices = synth.getVoices();
             availableVoices = {}; // Reset
-            for (const langCode in languageMap) { // Corrected: changed languageCode to langCode
+            for (const langCode in languageMap) {
                 const voice = voices.find(v => v.lang === langCode) ||
-                                voices.find(v => v.lang.startsWith(langCode.substring(0, 2))) ||
-                                voices.find(v => v.lang === 'en-US'); // Fallback to English
+                                 voices.find(v => v.lang.startsWith(langCode.substring(0, 2))) ||
+                                 voices.find(v => v.lang === 'en-US'); // Fallback to English
                 if (voice) {
                     availableVoices[langCode] = voice;
                 } else {
@@ -576,7 +576,7 @@
                 // IMPORTANT: If running this code outside of the Canvas environment (e.g., as a local HTML file),
                 // you MUST replace the empty string below with your actual Gemini API key.
                 // When running within the Canvas, leave it as an empty string.
-                const apiKey = ""; // API key is now an empty string as per instructions
+                const apiKey = "AIzaSyBMAtDO5xiwxL0CIQTc-J2XPRAqD_9YCPU"; // API key is now set here
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`;
 
                 const response = await fetch(apiUrl, {
@@ -657,7 +657,7 @@
             updateFlagDisplay(speakLanguageSelect, speakFlagDisplay);
             updateFlagDisplay(translateLanguageSelect, translateFlagDisplay);
 
-
+            // Check for SpeechRecognition API support
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
             if (!SpeechRecognition) {
@@ -671,16 +671,19 @@
                 return;
             }
 
+            // Initialize SpeechRecognition object
             recognition = new SpeechRecognition();
-            recognition.continuous = false;
-            recognition.interimResults = false;
+            recognition.continuous = false; // Set to false for single utterance recognition
+            recognition.interimResults = false; // Only return final results
             
             // Set initial language based on the speakLanguageSelect element
             recognition.lang = currentSpeakLanguage;
 
+            // Event handler for when speech recognition results are available
             recognition.onresult = async (event) => {
                 const transcript = event.results[0][0].transcript;
                 recognizedTextDisplay.textContent = `${languageMap[currentSpeakLanguage].name}: "${transcript}"`;
+                messageDisplay.textContent = 'Recognized speech. Translating...';
 
                 const translatedText = await getTranslationFromLLM(transcript, currentSpeakLanguage, currentTranslateLanguage);
                 translatedTextDisplay.textContent = `${languageMap[currentTranslateLanguage].name}: "${translatedText}"`;
@@ -688,101 +691,96 @@
                 if (translatedText && translatedText !== 'Translation not available.' && translatedText !== 'Translation failed.') {
                     speakTranslatedText(translatedText, currentTranslateLanguage);
                 } else {
-                    messageDisplay.textContent = 'Could not speak translation.';
+                    messageDisplay.textContent = 'Translation failed or not available for speech output.';
                 }
+                isListening = false; // Reset listening state after result
+                updateButtonState(); // Update button states
             };
 
+            // Event handler for when speech recognition ends
             recognition.onend = () => {
+                if (isListening) { // If it ended but we still think it's listening, it means an error or no speech
+                    messageDisplay.textContent = 'Listening stopped. No speech detected or an error occurred.';
+                } else {
+                    messageDisplay.textContent = 'Listening stopped.';
+                }
                 isListening = false;
-                messageDisplay.textContent = 'Listening stopped.';
                 updateButtonState();
             };
 
+            // Event handler for speech recognition errors
             recognition.onerror = (event) => {
-                isListening = false;
-                messageDisplay.textContent = `Speech recognition error: ${event.error}. Please try again.`;
                 console.error('Speech recognition error:', event.error);
-                updateButtonState();
+                messageDisplay.textContent = `Speech recognition error: ${event.error}. Please try again.`;
+                isListening = false; // Reset listening state on error
+                updateButtonState(); // Update button states
             };
 
+            // Event listener for the Start button
+            startButton.addEventListener('click', () => {
+                if (recognition) {
+                    recognizedTextDisplay.textContent = 'Listening...';
+                    translatedTextDisplay.textContent = 'Translation will appear here.';
+                    messageDisplay.textContent = 'Speak now...';
+                    isListening = true;
+                    updateButtonState();
+                    recognition.lang = currentSpeakLanguage; // Ensure language is set before starting
+                    recognition.start();
+                }
+            });
+
+            // Event listener for the Stop button
+            stopButton.addEventListener('click', () => {
+                if (recognition && isListening) {
+                    recognition.stop();
+                    messageDisplay.textContent = 'Stopping listening...';
+                    isListening = false;
+                    updateButtonState();
+                }
+            });
+
+            // Event listener for Speak Language selection change
             speakLanguageSelect.addEventListener('change', (event) => {
                 currentSpeakLanguage = event.target.value;
                 if (recognition) {
-                    recognition.lang = currentSpeakLanguage;
-                    messageDisplay.textContent = `Speak language set to: ${languageMap[currentSpeakLanguage].name}.`;
-                    updateTrySayingExamples(); // Update examples when speak language changes
-                    updateFlagDisplay(speakLanguageSelect, speakFlagDisplay); // Update flag display
+                    recognition.lang = currentSpeakLanguage; // Update recognition language
                 }
+                updateFlagDisplay(speakLanguageSelect, speakFlagDisplay);
+                updateTrySayingExamples(); // Update examples based on new speak language
+                messageDisplay.textContent = `Speak language set to ${languageMap[currentSpeakLanguage].name}.`;
             });
 
+            // Event listener for Translate To Language selection change
             translateLanguageSelect.addEventListener('change', (event) => {
                 currentTranslateLanguage = event.target.value;
-                messageDisplay.textContent = `Translate to language set to: ${languageMap[currentTranslateLanguage].name}.`;
-                updateFlagDisplay(translateLanguageSelect, translateFlagDisplay); // Update flag display
+                updateFlagDisplay(translateLanguageSelect, translateFlagDisplay);
+                messageDisplay.textContent = `Translate to language set to ${languageMap[currentTranslateLanguage].name}.`;
             });
 
-
+            // Event listener for Swap Languages button
             swapLanguagesButton.addEventListener('click', () => {
                 const tempSpeak = currentSpeakLanguage;
                 currentSpeakLanguage = currentTranslateLanguage;
                 currentTranslateLanguage = tempSpeak;
 
-                // Update the select dropdowns to reflect the new languages
                 speakLanguageSelect.value = currentSpeakLanguage;
                 translateLanguageSelect.value = currentTranslateLanguage;
 
                 if (recognition) {
-                    recognition.lang = currentSpeakLanguage;
-                    messageDisplay.textContent = `Languages swapped. Now speaking in ${languageMap[currentSpeakLanguage].name} and translating to ${languageMap[currentTranslateLanguage].name}.`;
-                    updateTrySayingExamples(); // Update examples after swapping
-                    updateFlagDisplay(speakLanguageSelect, speakFlagDisplay); // Update speak flag display
-                    updateFlagDisplay(translateLanguageSelect, translateFlagDisplay); // Update translate flag display
+                    recognition.lang = currentSpeakLanguage; // Update recognition language
                 }
+
+                updateFlagDisplay(speakLanguageSelect, speakFlagDisplay);
+                updateFlagDisplay(translateLanguageSelect, translateFlagDisplay);
+                updateTrySayingExamples(); // Update examples after swap
+
+                messageDisplay.textContent = `Languages swapped! Now speaking in ${languageMap[currentSpeakLanguage].name} and translating to ${languageMap[currentTranslateLanguage].name}.`;
             });
 
+            // Initial state updates
             updateButtonState();
-            updateTrySayingExamples(); // Initial setup of examples
+            updateTrySayingExamples(); // Initial call to populate examples
         };
-
-        function startListening() {
-            if (recognition) {
-                try {
-                    recognizedTextDisplay.textContent = `Listening for ${languageMap[currentSpeakLanguage].name}...`;
-                    translatedTextDisplay.textContent = 'Translation will appear here.';
-                    messageDisplay.textContent = '';
-                    synth.cancel(); // Cancel any ongoing speech
-
-                    recognition.start();
-                    isListening = true;
-                    messageDisplay.textContent = `Speak now in ${languageMap[currentSpeakLanguage].name}...`;
-                    updateButtonState();
-                } catch (error) {
-                    if (error.name === 'NotAllowedError') {
-                        messageDisplay.textContent = 'Microphone access denied. Please allow microphone access in your browser settings.';
-                    } else {
-                        messageDisplay.textContent = `Error starting speech recognition: ${error.message}.`;
-                    }
-                    console.error('Error starting recognition:', error);
-                    isListening = false;
-                    updateButtonState();
-                }
-            } else {
-                messageDisplay.textContent = 'Speech Recognition is not initialized.';
-            }
-        }
-
-        function stopListening() {
-            if (recognition && isListening) {
-                recognition.stop();
-                isListening = false;
-                messageDisplay.textContent = 'Listening stopped.';
-                updateButtonState();
-            }
-        }
-
-        // Attach event listeners to buttons
-        startButton.addEventListener('click', startListening);
-        stopButton.addEventListener('click', stopListening);
     </script>
 </body>
 </html>
