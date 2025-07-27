@@ -191,7 +191,7 @@
         </h1>
 
         <p class="mb-6">
-            Speak and translate between various Ethiopian, Indian, French, and other languages!
+            Speak and translate between various Ethiopian, Indian, French, German, Italian, and other languages!
         </p>
 
         <div class="mb-4">
@@ -363,6 +363,26 @@
                     { fr: "Merci", "en": "Thank you" },
                 ]
             },
+            "it-IT": { // Added Italian (Italy)
+                name: "Italian",
+                nativeName: "Italiano",
+                flagImageUrl: "https://placehold.co/40x25/009246/CE2B37?text=IT", // Italy: Green background, Red text (White is middle)
+                examples: [
+                    { it: "Ciao", en: "Hello" },
+                    { it: "Come stai?", en: "How are you?" },
+                    { it: "Grazie", en: "Thank you" },
+                ]
+            },
+            "de-DE": { // Added German (Germany)
+                name: "German",
+                nativeName: "Deutsch",
+                flagImageUrl: "https://placehold.co/40x25/000000/DD0000?text=DE", // Germany: Black background, Red text (Gold is bottom)
+                examples: [
+                    { de: "Hallo", en: "Hello" },
+                    { de: "Wie geht es dir?", en: "How are you?" },
+                    { de: "Danke schön", en: "Thank you" },
+                ]
+            },
             "en-US": { // A generic fallback for languages without specific codes or voices
                 name: "English (Fallback)",
                 nativeName: "English (Fallback)",
@@ -422,8 +442,8 @@
             availableVoices = {}; // Reset
             for (const langCode in languageMap) {
                 const voice = voices.find(v => v.lang === langCode) ||
-                                 voices.find(v => v.lang.startsWith(langCode.substring(0, 2))) ||
-                                 voices.find(v => v.lang === 'en-US'); // Fallback to English
+                                     voices.find(v => v.lang.startsWith(langCode.substring(0, 2))) ||
+                                     voices.find(v => v.lang === 'en-US'); // Fallback to English
                 if (voice) {
                     availableVoices[langCode] = voice;
                 } else {
@@ -476,7 +496,7 @@
             if (inputLangData.examples) {
                 inputLangData.examples.forEach(example => {
                     const li = document.createElement('li');
-                    // Find the key for the current input language (e.g., 'am', 'om', 'ti', 'so', 'ar', 'hi', 'bn', 'fr')
+                    // Find the key for the current input language (e.g., 'am', 'om', 'ti', 'so', 'ar', 'hi', 'bn', 'fr', 'it', 'de')
                     const langKey = Object.keys(example).find(key => key !== 'en');
                     if (langKey && example[langKey]) {
                         li.textContent = `"${example[langKey]}" (${example.en})`;
@@ -687,77 +707,77 @@
 
                 const translatedText = await getTranslationFromLLM(transcript, currentSpeakLanguage, currentTranslateLanguage);
                 translatedTextDisplay.textContent = `${languageMap[currentTranslateLanguage].name}: "${translatedText}"`;
+                messageDisplay.textContent = 'Translation complete.';
+                speakTranslatedText(translatedText, currentTranslateLanguage);
+                isListening = false; // Reset listening state after a single recognition
+                updateButtonState();
+            };
 
-                if (translatedText && translatedText !== 'Translation not available.' && translatedText !== 'Translation failed.') {
-                    speakTranslatedText(translatedText, currentTranslateLanguage);
-                } else {
-                    messageDisplay.textContent = 'Translation failed or not available for speech output.';
-                }
-                isListening = false; // Reset listening state after result
-                updateButtonState(); // Update button states
+            // Event handler for when speech recognition starts
+            recognition.onstart = () => {
+                isListening = true;
+                updateButtonState();
+                recognizedTextDisplay.textContent = 'Listening... Speak now!';
+                translatedTextDisplay.textContent = 'Translation will appear here.';
+                messageDisplay.textContent = 'Listening for speech...';
             };
 
             // Event handler for when speech recognition ends
             recognition.onend = () => {
-                if (isListening) { // If it ended but we still think it's listening, it means an error or no speech
-                    messageDisplay.textContent = 'Listening stopped. No speech detected or an error occurred.';
-                } else {
-                    messageDisplay.textContent = 'Listening stopped.';
+                if (isListening) { // If it ended without a result (e.g., silence)
+                    isListening = false;
+                    updateButtonState();
+                    messageDisplay.textContent = 'Listening stopped. No speech detected or recognized.';
+                    recognizedTextDisplay.textContent = 'Speak here...';
+                    translatedTextDisplay.textContent = 'Translation will appear here.';
                 }
-                isListening = false;
-                updateButtonState();
             };
 
             // Event handler for speech recognition errors
             recognition.onerror = (event) => {
-                console.error('Speech recognition error:', event.error);
+                isListening = false;
+                updateButtonState();
+                console.error('Speech recognition error:', event);
                 messageDisplay.textContent = `Speech recognition error: ${event.error}. Please try again.`;
-                isListening = false; // Reset listening state on error
-                updateButtonState(); // Update button states
+                recognizedTextDisplay.textContent = 'Speak here...';
+                translatedTextDisplay.textContent = 'Translation will appear here.';
             };
 
-            // Event listener for the Start button
+            // Event Listeners for buttons and selects
             startButton.addEventListener('click', () => {
-                if (recognition) {
-                    recognizedTextDisplay.textContent = 'Listening...';
-                    translatedTextDisplay.textContent = 'Translation will appear here.';
-                    messageDisplay.textContent = 'Speak now...';
-                    isListening = true;
-                    updateButtonState();
-                    recognition.lang = currentSpeakLanguage; // Ensure language is set before starting
-                    recognition.start();
+                if (recognition && !isListening) {
+                    try {
+                        recognition.lang = speakLanguageSelect.value; // Set language before starting
+                        recognition.start();
+                    } catch (e) {
+                        console.error("Error starting recognition:", e);
+                        messageDisplay.textContent = `Error starting recognition: ${e.message}.`;
+                    }
                 }
             });
 
-            // Event listener for the Stop button
             stopButton.addEventListener('click', () => {
                 if (recognition && isListening) {
                     recognition.stop();
-                    messageDisplay.textContent = 'Stopping listening...';
                     isListening = false;
                     updateButtonState();
+                    messageDisplay.textContent = 'Listening stopped by user.';
                 }
             });
 
-            // Event listener for Speak Language selection change
             speakLanguageSelect.addEventListener('change', (event) => {
                 currentSpeakLanguage = event.target.value;
-                if (recognition) {
-                    recognition.lang = currentSpeakLanguage; // Update recognition language
-                }
                 updateFlagDisplay(speakLanguageSelect, speakFlagDisplay);
-                updateTrySayingExamples(); // Update examples based on new speak language
+                updateTrySayingExamples(); // Update examples when speak language changes
                 messageDisplay.textContent = `Speak language set to ${languageMap[currentSpeakLanguage].name}.`;
             });
 
-            // Event listener for Translate To Language selection change
             translateLanguageSelect.addEventListener('change', (event) => {
                 currentTranslateLanguage = event.target.value;
                 updateFlagDisplay(translateLanguageSelect, translateFlagDisplay);
                 messageDisplay.textContent = `Translate to language set to ${languageMap[currentTranslateLanguage].name}.`;
             });
 
-            // Event listener for Swap Languages button
             swapLanguagesButton.addEventListener('click', () => {
                 const tempSpeak = currentSpeakLanguage;
                 currentSpeakLanguage = currentTranslateLanguage;
@@ -766,10 +786,6 @@
                 speakLanguageSelect.value = currentSpeakLanguage;
                 translateLanguageSelect.value = currentTranslateLanguage;
 
-                if (recognition) {
-                    recognition.lang = currentSpeakLanguage; // Update recognition language
-                }
-
                 updateFlagDisplay(speakLanguageSelect, speakFlagDisplay);
                 updateFlagDisplay(translateLanguageSelect, translateFlagDisplay);
                 updateTrySayingExamples(); // Update examples after swap
@@ -777,9 +793,9 @@
                 messageDisplay.textContent = `Languages swapped! Now speaking in ${languageMap[currentSpeakLanguage].name} and translating to ${languageMap[currentTranslateLanguage].name}.`;
             });
 
-            // Initial state updates
-            updateButtonState();
-            updateTrySayingExamples(); // Initial call to populate examples
+            // Initial update of "Try saying" examples
+            updateTrySayingExamples();
+            updateButtonState(); // Set initial button states
         };
     </script>
 </body>
